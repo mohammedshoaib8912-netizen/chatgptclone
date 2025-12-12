@@ -28,8 +28,18 @@ function PureVoiceInputButton({
   const handleTranscription = useCallback(
     async (audioBlob: Blob) => {
       try {
+        // Get proper extension from MIME type
+        const mimeTypeToExtension: Record<string, string> = {
+          "audio/webm": "webm",
+          "audio/wav": "wav",
+          "audio/mp4": "m4a",
+          "audio/mpeg": "mp3",
+          "audio/ogg": "ogg",
+        };
+        const extension = mimeTypeToExtension[audioBlob.type] || "webm";
+        
         const formData = new FormData();
-        formData.append("file", audioBlob, "audio.webm");
+        formData.append("file", audioBlob, `audio.${extension}`);
 
         const response = await fetch("/api/speech-to-text", {
           method: "POST",
@@ -100,8 +110,16 @@ function PureVoiceInputButton({
 
   const isDisabled = status !== "ready" || recordingState === "processing";
 
+  const ariaLabel =
+    recordingState === "recording"
+      ? "Stop recording"
+      : recordingState === "processing"
+        ? "Processing recording"
+        : "Record voice message";
+
   return (
     <Button
+      aria-label={ariaLabel}
       className="aspect-square h-8 rounded-lg p-1 transition-colors hover:bg-accent"
       data-testid="voice-input-button"
       disabled={isDisabled}

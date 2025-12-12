@@ -11,8 +11,9 @@ export function useVoiceRecording() {
   const audioChunksRef = useRef<Blob[]>([]);
 
   const startRecording = useCallback(async () => {
+    let stream: MediaStream | null = null;
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
+      stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
       });
 
@@ -41,6 +42,10 @@ export function useVoiceRecording() {
       mediaRecorder.start();
       setRecordingState("recording");
     } catch (error) {
+      // Clean up stream if an error occurs after obtaining it
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
       console.error("Error starting recording:", error);
       throw error;
     }
@@ -50,7 +55,7 @@ export function useVoiceRecording() {
     return new Promise((resolve, reject) => {
       const mediaRecorder = mediaRecorderRef.current;
 
-      if (!mediaRecorder || recordingState !== "recording") {
+      if (!mediaRecorder) {
         reject(new Error("No active recording"));
         return;
       }
@@ -74,18 +79,18 @@ export function useVoiceRecording() {
       setRecordingState("processing");
       mediaRecorder.stop();
     });
-  }, [recordingState]);
+  }, []);
 
   const cancelRecording = useCallback(() => {
     const mediaRecorder = mediaRecorderRef.current;
 
-    if (mediaRecorder && recordingState === "recording") {
+    if (mediaRecorder) {
       mediaRecorder.stream.getTracks().forEach((track) => track.stop());
       mediaRecorder.stop();
       audioChunksRef.current = [];
       setRecordingState("idle");
     }
-  }, [recordingState]);
+  }, []);
 
   const resetState = useCallback(() => {
     setRecordingState("idle");
