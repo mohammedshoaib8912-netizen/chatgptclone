@@ -299,6 +299,7 @@ function PureMultimodalInput({
         )}
 
       <input
+        accept="image/*"
         className="-top-4 -left-4 pointer-events-none fixed size-0.5 opacity-0"
         multiple
         onChange={handleFileChange}
