@@ -54,22 +54,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: errorMessage }, { status: 400 });
     }
 
-    // Configure OpenAI client to use AI Gateway
-    const apiKey = process.env.AI_GATEWAY_API_KEY;
-    const baseURL = process.env.AI_GATEWAY_BASE_URL;
+    // Configure OpenAI client
+    // Note: This requires OPENAI_API_KEY to be set in environment variables
+    // The AI Gateway doesn't currently support the Whisper API endpoint
+    const apiKey = process.env.OPENAI_API_KEY;
 
-    // On Vercel, OIDC tokens are used automatically, so API key is not required
-    // For non-Vercel deployments, an API key must be provided
-    if (!apiKey && !process.env.VERCEL) {
+    if (!apiKey) {
       return NextResponse.json(
-        { error: "AI Gateway not configured" },
+        { error: "OpenAI API key not configured. Please set OPENAI_API_KEY environment variable." },
         { status: 500 }
       );
     }
 
     const openai = new OpenAI({
-      apiKey: apiKey || "dummy-key-for-vercel-oidc",
-      baseURL: baseURL,
+      apiKey: apiKey,
     });
 
     // Convert the Blob to a File object for OpenAI
