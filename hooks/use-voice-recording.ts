@@ -16,8 +16,18 @@ export function useVoiceRecording() {
         audio: true,
       });
 
+      // Try to use webm first, fall back to supported formats
+      let mimeType = "audio/webm";
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
+        if (MediaRecorder.isTypeSupported("audio/mp4")) {
+          mimeType = "audio/mp4";
+        } else if (MediaRecorder.isTypeSupported("audio/wav")) {
+          mimeType = "audio/wav";
+        }
+      }
+
       const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: "audio/webm",
+        mimeType,
       });
       mediaRecorderRef.current = mediaRecorder;
       audioChunksRef.current = [];
@@ -47,7 +57,7 @@ export function useVoiceRecording() {
 
       mediaRecorder.onstop = () => {
         const audioBlob = new Blob(audioChunksRef.current, {
-          type: "audio/webm",
+          type: mediaRecorder.mimeType,
         });
 
         // Stop all tracks to release the microphone
@@ -56,8 +66,9 @@ export function useVoiceRecording() {
         resolve(audioBlob);
       };
 
-      mediaRecorder.onerror = (event) => {
-        reject(event);
+      mediaRecorder.onerror = (event: Event) => {
+        const error = (event as ErrorEvent).error || new Error("Recording failed");
+        reject(error);
       };
 
       setRecordingState("processing");

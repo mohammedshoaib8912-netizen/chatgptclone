@@ -58,6 +58,8 @@ export async function POST(request: Request) {
     const apiKey = process.env.AI_GATEWAY_API_KEY;
     const baseURL = process.env.AI_GATEWAY_BASE_URL;
 
+    // On Vercel, OIDC tokens are used automatically, so API key is not required
+    // For non-Vercel deployments, an API key must be provided
     if (!apiKey && !process.env.VERCEL) {
       return NextResponse.json(
         { error: "AI Gateway not configured" },
@@ -66,12 +68,24 @@ export async function POST(request: Request) {
     }
 
     const openai = new OpenAI({
-      apiKey: apiKey || "dummy-key-for-vercel",
+      apiKey: apiKey || "dummy-key-for-vercel-oidc",
       baseURL: baseURL,
     });
 
     // Convert the Blob to a File object for OpenAI
-    const audioFile = new File([file], "audio.webm", { type: file.type });
+    // Map MIME type to appropriate file extension
+    const mimeTypeToExtension: Record<string, string> = {
+      "audio/webm": "webm",
+      "audio/mpeg": "mp3",
+      "audio/mp3": "mp3",
+      "audio/wav": "wav",
+      "audio/m4a": "m4a",
+      "audio/mp4": "m4a",
+    };
+    const extension = mimeTypeToExtension[file.type] || "webm";
+    const audioFile = new File([file], `audio.${extension}`, {
+      type: file.type,
+    });
 
     const transcription = await openai.audio.transcriptions.create({
       file: audioFile,

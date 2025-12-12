@@ -121,7 +121,6 @@ function PureVoiceInputButton({
               : ""
           }
           size={14}
-          style={{ width: 14, height: 14 }}
         />
       )}
     </Button>
