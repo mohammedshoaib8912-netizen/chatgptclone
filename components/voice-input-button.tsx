@@ -110,7 +110,9 @@ function PureVoiceInputButton({
       variant="ghost"
     >
       {recordingState === "processing" ? (
-        <LoaderIcon size={14} style={{ animation: "spin 1s linear infinite" }} />
+        <div className="animate-spin">
+          <LoaderIcon size={14} />
+        </div>
       ) : (
         <MicrophoneIcon
           className={
