@@ -28,17 +28,9 @@ const AudioFileSchema = z.object({
       message: "File size should be less than 25MB",
     })
     .refine(
-      (file) =>
-        [
-          "audio/webm",
-          "audio/mpeg",
-          "audio/mp3",
-          "audio/wav",
-          "audio/m4a",
-          "audio/mp4",
-        ].includes(file.type),
+      (file) => file.type.startsWith("audio/"),
       {
-        message: "File type should be webm, mp3, wav, m4a, or mp4",
+        message: "File must be an audio file",
       }
     ),
 });
@@ -89,10 +81,21 @@ export async function POST(request: Request) {
       "audio/mpeg": "mp3",
       "audio/mp3": "mp3",
       "audio/wav": "wav",
+      "audio/wave": "wav",
+      "audio/x-wav": "wav",
       "audio/m4a": "m4a",
       "audio/mp4": "m4a",
+      "audio/x-m4a": "m4a",
+      "audio/ogg": "ogg",
+      "audio/opus": "opus",
+      "audio/flac": "flac",
+      "audio/aac": "aac",
+      "audio/x-aac": "aac",
+      "audio/3gpp": "3gp",
+      "audio/3gpp2": "3g2",
+      "audio/amr": "amr",
     };
-    const extension = mimeTypeToExtension[file.type] || "webm";
+    const extension = mimeTypeToExtension[file.type] || file.type.split("/")[1] || "audio";
     const audioFile = new File([file], `audio.${extension}`, {
       type: file.type,
     });
