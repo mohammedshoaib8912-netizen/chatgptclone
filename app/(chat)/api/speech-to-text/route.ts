@@ -61,8 +61,8 @@ export async function POST(request: Request) {
 
     if (!apiKey) {
       return NextResponse.json(
-        { error: "OpenAI API key not configured. Please set OPENAI_API_KEY environment variable." },
-        { status: 500 }
+        { error: "Voice chat is not configured. Please contact the administrator to enable this feature." },
+        { status: 503 }
       );
     }
 
