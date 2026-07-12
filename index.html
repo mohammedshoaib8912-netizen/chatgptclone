@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio website for Mohammed Shoaib">
+  <title>Mohammed Shoaib | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-orb orb-one"></div>
+  <div class="bg-orb orb-two"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#home">MS</a>
+    <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav id="site-nav" class="site-nav">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero section reveal">
+      <div class="hero-copy">
+        <p class="eyebrow">Portfolio of Mohammed Shoaib</p>
+        <h1>Designing clean, modern web experiences that feel fast and focused.</h1>
+        <p class="hero-text">
+          I build responsive websites with HTML, CSS, and JavaScript that combine sharp visuals,
+          smooth interactions, and strong usability.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#projects">View Projects</a>
+          <a class="secondary-btn" href="#contact">Contact Me</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <strong data-counter="12">0</strong>
+            <span>Completed builds</span>
+          </div>
+          <div>
+            <strong data-counter="5">0</strong>
+            <span>Core skills</span>
+          </div>
+          <div>
+            <strong data-counter="100">0</strong>
+            <span>Responsive focus</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="profile-panel">
+          <div class="profile-avatar">MS</div>
+          <p class="profile-role">Frontend Developer</p>
+          <h2>Mohammed Shoaib</h2>
+          <p>
+            Building elegant portfolio pages, landing pages, and interactive UI components.
+          </p>
+        </div>
+        <div class="mini-grid">
+          <article>
+            <span>01</span>
+            <h3>Responsive</h3>
+            <p>Mobile-first layouts that adapt smoothly across screens.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Interactive</h3>
+            <p>JavaScript details that make pages feel polished and alive.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section reveal">
+      <div class="section-heading">
+        <p class="eyebrow">About</p>
+        <h2>Focused on clean structure, clear content, and modern visual design.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="glass-card">
+          <p>
+            I create front-end experiences that are easy to navigate, quick to load, and pleasant to use.
+            The goal is simple: make the work and the person behind it stand out.
+          </p>
+        </div>
+        <div class="glass-card highlight-card">
+          <h3>What I value</h3>
+          <ul>
+            <li>Clean layout systems</li>
+            <li>Strong typography</li>
+            <li>Responsive design</li>
+            <li>Smooth user interactions</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section reveal">
+      <div class="section-heading">
+        <p class="eyebrow">Skills</p>
+        <h2>Tools and technologies used to turn ideas into working pages.</h2>
+      </div>
+      <div class="skill-list">
+        <span>HTML5</span>
+        <span>CSS3</span>
+        <span>JavaScript</span>
+        <span>Responsive Design</span>
+        <span>UI Animation</span>
+        <span>Accessibility Basics</span>
+      </div>
+    </section>
+
+    <section id="projects" class="section reveal">
+      <div class="section-heading">
+        <p class="eyebrow">Projects</p>
+        <h2>A few example projects that show the style and quality of the portfolio.</h2>
+      </div>
+      <div class="project-grid">
+        <article class="project-card">
+          <span>Featured 01</span>
+          <h3>Creative Portfolio</h3>
+          <p>A bold personal website layout with strong typography and smooth scrolling sections.</p>
+        </article>
+        <article class="project-card">
+          <span>Featured 02</span>
+          <h3>Landing Page</h3>
+          <p>A conversion-focused landing page with a clear call to action and modern visual hierarchy.</p>
+        </article>
+        <article class="project-card">
+          <span>Featured 03</span>
+          <h3>Product Showcase</h3>
+          <p>A clean interface for presenting products, features, and key benefits in a compact format.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section reveal">
+      <div class="contact-card">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Let us build your next website.</h2>
+          <p>
+            Reach out if you want a modern portfolio, a landing page, or a custom front-end interface.
+          </p>
+        </div>
+        <a class="primary-btn" href="mailto:mohammedshoaib@example.com">mohammedshoaib@example.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Mohammed Shoaib. Built with HTML, CSS, and JavaScript.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
