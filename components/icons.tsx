@@ -1211,3 +1211,26 @@ export const WarningIcon = ({ size = 16 }: { size?: number }) => {
     </svg>
   );
 };
+
+export const MicrophoneIcon = ({
+  size = 16,
+  ...props
+}: { size?: number } & React.SVGProps<SVGSVGElement>) => {
+  return (
+    <svg
+      height={size}
+      strokeLinejoin="round"
+      style={{ color: "currentcolor", ...props.style }}
+      viewBox="0 0 16 16"
+      width={size}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M8 0.5C6.61929 0.5 5.5 1.61929 5.5 3V8C5.5 9.38071 6.61929 10.5 8 10.5C9.38071 10.5 10.5 9.38071 10.5 8V3C10.5 1.61929 9.38071 0.5 8 0.5ZM4 8C4 7.44772 3.55228 7 3 7C2.44772 7 2 7.44772 2 8C2 10.7614 4.23858 13 7 13V14.5H5.5H5V16H5.5H8H10.5H11V14.5H10.5H9V13C11.7614 13 14 10.7614 14 8C14 7.44772 13.5523 7 13 7C12.4477 7 12 7.44772 12 8C12 9.933 10.433 11.5 8.5 11.5H7.5C5.567 11.5 4 9.933 4 8ZM8 2C7.44772 2 7 2.44772 7 3V8C7 8.55228 7.44772 9 8 9C8.55228 9 9 8.55228 9 8V3C9 2.44772 8.55228 2 8 2Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
